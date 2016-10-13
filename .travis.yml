@@ -29,7 +29,7 @@ before_install:
   - docker-compose version
 
   #load cache
-  - if [ -f ${DOCKER_CACHE_FILE} ]; then gunzip -c ${DOCKER_CACHE_FILE} | docker load; fi
+  - if [ -f ${DOCKER_CACHE_FILE} ]; then gunzip -c /home/travis/docker/cache.tar.gz | docker load; fi
 
   #build
   - docker build .
