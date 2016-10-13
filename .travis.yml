@@ -27,3 +27,4 @@ before_install:
   - docker build .
 
 script:
+  - echo "script"
