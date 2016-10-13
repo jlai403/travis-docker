@@ -1,0 +1,29 @@
+sudo: required
+
+env:
+  global:
+    - DOCKER_COMPOSE_VERSION=1.8.1
+
+language: node_js
+
+node_js:
+  - "6"
+
+services:
+  - docker
+
+before_install:
+  # upgrade docker-compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+  # check docker versions
+  - docker version
+  - docker-compose version
+
+  #build
+  - docker build .
+
+script:
