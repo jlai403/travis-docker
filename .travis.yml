@@ -33,10 +33,11 @@ before_install:
   # - if [ -f ${DOCKER_CACHE_FILE} ]; then gzip -c ${DOCKER_CACHE_FILE} | docker load; fi
 
   #build
-  - docker build .
+  - docker-compose build travis-docker
+  - docker images
 
 script:
-  - if [[ ${TRAVIS_BRANCH} == "master" ]] && [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}) ; docker save $(docker history -q ${DOCKER_REPOSITORY}:${TRAVIS_COMMIT} | grep -v '<missing>') | gzip > ${DOCKER_CACHE_FILE}; fi
+  - if [[ ${TRAVIS_BRANCH} == "master" ]] && [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}) ; docker save $(docker history -q travis-docker:latest | grep -v '<missing>') | gzip > ${DOCKER_CACHE_FILE}; fi
 
 notifications:
   email: false
