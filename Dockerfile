@@ -1,12 +1,15 @@
 FROM node:6
 
-# Create app directory
 RUN mkdir -p /app
-WORKDIR /app
 
 # Install app dependencies
-COPY package.json /app/
-RUN npm install
+# Runs `npm install` only when there are changes to package.json
+COPY package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN cp -a /tmp/node_modules /app/
 
 # Bundle app source
+WORKDIR /app
 COPY . /app
+
+RUN ls -l
