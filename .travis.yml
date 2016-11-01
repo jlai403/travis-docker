@@ -30,11 +30,12 @@ before_install:
 
   #load cache
   - ls -al /home/travis/docker/
+  - tar -tf ${DOCKER_CACHE_FILE}
   - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
+  - docker images
 
   #build
   - docker-compose build travis-docker
-  - docker images
 
 script:
   - if [[ ${TRAVIS_BRANCH} == "master" ]] && [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}); docker save travis-docker > ${DOCKER_CACHE_FILE}; fi
