@@ -35,7 +35,10 @@ install:
   - docker-compose build travis-docker
 
 script:
-  - if [[ ${TRAVIS_BRANCH} == "master" ]] && [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}); docker save travis-docker $(docker history -q travis-docker | grep -v '<missing>') > ${DOCKER_CACHE_FILE}; fi
+  - echo "run script"
+
+after_success:
+  - if [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}); docker save travis-docker $(docker history -q travis-docker | grep -v '<missing>') > ${DOCKER_CACHE_FILE}; fi
 
 notifications:
   email: false
