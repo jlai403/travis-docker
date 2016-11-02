@@ -29,7 +29,7 @@ before_install:
   # - docker-compose version
 
   #load cache
-  # - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
+  - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
 
 install:
   - docker-compose build travis-docker
