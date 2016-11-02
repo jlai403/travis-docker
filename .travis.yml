@@ -38,7 +38,7 @@ before_install:
   - docker-compose build travis-docker
 
 script:
-  - if [[ ${TRAVIS_BRANCH} == "master" ]] && [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}); docker save travis-docker > ${DOCKER_CACHE_FILE}; fi
+  - if [[ ${TRAVIS_BRANCH} == "master" ]] && [[ ${TRAVIS_PULL_REQUEST} == "false" ]]; then mkdir -p $(dirname ${DOCKER_CACHE_FILE}); docker save travis-docker $(docker history -q travis-docker | grep -v '<missing>') > ${DOCKER_CACHE_FILE}; fi
 
 notifications:
   email: false

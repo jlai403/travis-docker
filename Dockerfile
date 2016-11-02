@@ -11,5 +11,3 @@ RUN cp -a /tmp/node_modules /app/
 # Bundle app source
 WORKDIR /app
 COPY . /app
-
-RUN ls -l
