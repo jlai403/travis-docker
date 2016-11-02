@@ -25,12 +25,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
   # check docker versions
-  - docker version
-  - docker-compose version
+  # - docker version
+  # - docker-compose version
 
   #load cache
-  - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
-  - docker images
+  # - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
 
 install:
   - docker-compose build travis-docker
