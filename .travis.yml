@@ -32,7 +32,7 @@ before_install:
   - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
   - docker images
 
-  #build
+install:
   - docker-compose build travis-docker
 
 script:
