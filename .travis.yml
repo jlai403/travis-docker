@@ -32,10 +32,16 @@ before_install:
   - if [ -f ${DOCKER_CACHE_FILE} ]; then docker load < ${DOCKER_CACHE_FILE}; fi
 
 install:
-  - docker-compose build travis-docker
+  - echo "install"
+  - npm install
+
+before_script:
+  - echo "before script"
+  - npm audit
 
 script:
   - echo "run script"
+  - docker-compose build travis-docker
 
 after_success:
   - echo ${TRAVIS_PULL_REQUEST}
